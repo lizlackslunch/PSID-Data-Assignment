@@ -101,6 +101,19 @@ summarize
     replace RaceUnknown = 1 if Race >= 7
 
 // Education
+    // Drops the few who refused to answer if they have a college degree or not
+    drop if Education == 9
+
+    // Generates dummy variable for 
+    generate CollegeDegree
+
+    
+    // Generates dummy variable for 
+    generate NoCollegeDegree
+    
+
+    // Generates dummy variable for 
+    generate SomeCollege
 
 
 // Income
