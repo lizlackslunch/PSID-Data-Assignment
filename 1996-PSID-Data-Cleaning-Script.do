@@ -11,13 +11,16 @@ summarize
     drop if Age == 0
 
 // Sex
-    // Drops if sex data point is already 0 (Wild Code)
-    // Because gender unknown for this value and would skew towards female if left
+    // Drops if sex unknown
     drop if Sex == 0
 
-    // Transforms sex data points to 0 from 2 (female)
-    // Because it makes variable a dummy
-    replace Sex = 0 if Sex == 2
+    // Generates dummy variable for Males
+    generate Male = 0
+    replace Male = 1 if Sex == 1
+
+    // Generates dummy variable for Females
+    generate Female = 0
+    replace Female = 1 if Sex == 2
     
 // Homeownership
     // Generates dummy variable if homeowner
@@ -29,6 +32,8 @@ summarize
     replace Rents = 1 if Homeownership == 5
 
     // Generates dummy variable if homeownership is unknown
+    generate UnknownHome = 0 
+    replace UnknownHome = 1 if Homeownership == 8
 
 // FathersEducation
     // Generates dummy variable if father has some primary education
@@ -95,7 +100,7 @@ summarize
     replace Latino = 1 if Race == 5
 
     generate RaceOther = 0
-    replace RaceOther if Race == 6 | Race == 7
+    replace RaceOther = 1 if Race == 6 | Race == 7
 
     generate RaceUnknown = 0
     replace RaceUnknown = 1 if Race >= 7
@@ -104,25 +109,41 @@ summarize
     // Drops the few who refused to answer if they have a college degree or not
     drop if Education == 9
 
-    // Generates dummy variable for 
-    generate CollegeDegree
-
+    // Generates dummy variable for HoH with college degree
+    generate CollegeDegree = 0
+    replace CollegeDegree = 1 if Education == 1
     
-    // Generates dummy variable for 
-    generate NoCollegeDegree
-    
+    // Generates dummy variable for HoH with no college degree
+    generate NoCollegeDegree = 0
+    replace NoCollegeDegree = 1 if Education == 5    
 
-    // Generates dummy variable for 
-    generate SomeCollege
+    // Generates dummy variable for HoH with some college degree
+    generate SomeCollege = 0
+    replace SomeCollege = 1 if Education == 0
 
 
 // Income
 
 
 // Marriage
+    // Generates dummy variable for married HoH
+    generate Married = 0
+    replace Married = 1 if Marriage == 1
 
+    // Generates dummy variable for single (never married) HoH
+    generate Single = 0
+    replace Single = 1 if Marriage == 2
 
+    // Generates dummy variable for widowed HoH
+    generate Widowed = 0
+    replace Widowed = 1 if Marriage == 3
 
-//generates new dummy variable for Homeownership==8 (neither owns nor rents)
-generate UnknownHome = 0 
-replace UnknownHome = 1 if Homeownership==8
+    // Generates dummy variable for divorced HoH
+    generate Divorced = 0
+    replace Divorced = 1 if Marriage == 4
+
+    // Generates dummy variable for separated HoH
+    generate Separated = 0
+    replace Seoarated = 1 if Marriage == 5
+
+summarize
