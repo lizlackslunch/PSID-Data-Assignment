@@ -144,6 +144,6 @@ summarize
 
     // Generates dummy variable for separated HoH
     generate Separated = 0
-    replace Seoarated = 1 if Marriage == 5
+    replace Separated = 1 if Marriage == 5
 
 summarize
