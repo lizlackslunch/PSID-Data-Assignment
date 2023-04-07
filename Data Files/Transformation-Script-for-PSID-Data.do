@@ -1,7 +1,4 @@
 // This is a do-file that cleans my 1996 PSID data
-
-summarize
-
 //Age
     // Drops ages equal to 999
     drop if Age == 999
@@ -46,8 +43,8 @@ summarize
     replace FatherHighschool = 1 if FatherEducation == 4
 
     // Generates dummy variable if father has some college education
-    generate SomeFatherCollege = 0
-    replace SomeFatherCollege = 1 if FatherEducation == 6
+    generate FatherSomeCollege = 0
+    replace FatherSomeCollege = 1 if FatherEducation == 6
 
     // Generates dummy variable if father has a bachelors degree
     generate FatherBachelors = 0
@@ -68,8 +65,8 @@ summarize
     replace MotherHighschool = 1 if MotherEducation == 4
 
     // Generates dummy variable if mother has some college education
-    generate SomeMotherCollege = 0
-    replace SomeMotherCollege = 1 if MotherEducation == 6
+    generate MotherSomeCollege = 0
+    replace MotherSomeCollege = 1 if MotherEducation == 6
 
     // Generates dummy variable if mother has a bachelors degree
     generate MotherBachelors = 0
@@ -121,29 +118,23 @@ summarize
     generate SomeCollege = 0
     replace SomeCollege = 1 if Education == 0
 
-
-// Income
-
-
-// Marriage
+// MaritalStatus
     // Generates dummy variable for married HoH
     generate Married = 0
-    replace Married = 1 if Marriage == 1
+    replace Married = 1 if MaritalStatus == 1
 
     // Generates dummy variable for single (never married) HoH
     generate Single = 0
-    replace Single = 1 if Marriage == 2
+    replace Single = 1 if MaritalStatus == 2
 
     // Generates dummy variable for widowed HoH
     generate Widowed = 0
-    replace Widowed = 1 if Marriage == 3
+    replace Widowed = 1 if MaritalStatus == 3
 
     // Generates dummy variable for divorced HoH
     generate Divorced = 0
-    replace Divorced = 1 if Marriage == 4
+    replace Divorced = 1 if MaritalStatus == 4
 
     // Generates dummy variable for separated HoH
     generate Separated = 0
-    replace Separated = 1 if Marriage == 5
-
-summarize
+    replace Separated = 1 if MaritalStatus == 5
